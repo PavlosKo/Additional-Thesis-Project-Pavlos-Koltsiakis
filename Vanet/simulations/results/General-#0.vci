@@ -1,0 +1,147 @@
+file 7559 1732203841                                            
+version 2
+run General-0-20241121-15:43:43-16648
+attr configname General
+attr datetime 20241121-15:43:43
+attr experiment General
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Vanet
+attr processid 16648
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param *.host*.ipv4.arp.typename "\"GlobalArp\""
+param *.hostA.numApps 1
+param *.hostA.app[0].typename "\"UdpBasicApp\""
+param *.hostA.app[0].destAddresses "\"hostB\""
+param *.hostA.app[0].destPort 5000
+param *.hostA.app[0].messageLength 1000B
+param *.hostA.app[0].sendInterval exponential(12ms)
+param *.hostA.app[0].packetName "\"UDPData\""
+param *.hostB.numApps 1
+param *.hostB.app[0].typename "\"UdpSink\""
+param *.hostB.app[0].localPort 5000
+param *.host*.wlan[0].typename "\"AckingWirelessInterface\""
+param *.host*.wlan[0].mac.useAck false
+param *.host*.wlan[0].mac.fullDuplex false
+param *.host*.wlan[0].radio.transmitter.communicationRange 500m
+param *.host*.wlan[0].radio.receiver.ignoreInterference true
+param *.host*.wlan[0].mac.headerLength 23B
+param *.host*.**.bitrate 1Mbps
+
+vector 0 Vanet.hostA.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 1 Vanet.hostB.wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 2 Vanet.hostA.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 3 Vanet.hostB.wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 4 Vanet.hostA.app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSent
+attr title "packets sent, vector(packetBytes)"
+vector 5 Vanet.hostA.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSent
+attr title "packets sent, vector(packetBytes)"
+vector 6 Vanet.hostA.wlan[0].mac rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, vector(packetBytes)"
+vector 7 Vanet.hostA.wlan[0].mac.queue packetPushed:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packet pushed, vector(packetBytes)"
+vector 8 Vanet.hostA.wlan[0].mac.queue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
+attr title "queue length, vector"
+vector 9 Vanet.hostA.wlan[0].mac.queue packetPopped:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packet popped, vector(packetBytes)"
+vector 10 Vanet.hostA.wlan[0].mac.queue queueingTime:vector ETV
+attr interpolationmode none
+attr source queueingTime(packetPopped)
+attr title "queueing times, vector"
+attr unit s
+vector 11 Vanet.hostA.wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr source transmissionStateChanged
+attr title "Radio transmission state, vector"
+vector 12 Vanet.hostA.wlan[0].mac sentDownPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToLower
+attr title "packets sent to lower layer, vector(packetBytes)"
+vector 13 Vanet.hostB.wlan[0].mac rcvdPkFromLl:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceivedFromLower
+attr title "packets received from lower layer, vector(packetBytes)"
+vector 14 Vanet.hostB.wlan[0].mac passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed to higher layer, vector(packetBytes)"
+vector 15 Vanet.hostB.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceived
+attr title "packets received, vector(packetBytes)"
+vector 16 Vanet.hostB.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed up, vector(count)"
+vector 17 Vanet.hostB.app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceived
+attr title "packets received, vector(packetBytes)"
+vector 18 Vanet.hostB.app[0] endToEndDelay:vector ETV
+attr interpolationmode none
+attr source dataAge(packetReceived)
+attr title "end-to-end delay, vector"
+attr unit s
+vector 19 Vanet.hostB.app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number, vector"
+0	4638 199 0 49 0 0.058393743993 11 0 3 22 56
+1	4837 24 0 0 0 0 3 0 2 2 4
+2	4861 183 0 49 0 0.058393743993 9 0 1 5 5
+3	5044 184 0 50 0 0.058395078249 9 1 3 19 47
+4	5228 99 4 36 0.022315250545 0.048291974356 4 1000 1000 4000 4000000
+5	5327 99 6 37 0.022315250545 0.048291974356 4 1008 1008 4032 4064256
+6	5426 99 8 39 0.022315250545 0.048291974356 4 1028 1028 4112 4227136
+7	5525 99 8 39 0.022315250545 0.048291974356 4 1028 1028 4112 4227136
+8	5624 174 8 41 0.022315250545 0.049889743993 8 0 1 4 4
+9	5798 99 8 41 0.022315250545 0.049889743993 4 1028 1028 4112 4227136
+10	5897 116 8 41 0.022315250545 0.049889743993 4 0 0.00189141816 0.003489187797 6.1303304688969e-06
+11	6013 366 8 49 0.022315250545 0.058393743993 16 0 2 16 24
+12	6379 103 8 41 0.022315250545 0.049889743993 4 1051 1051 4204 4418404
+13	6482 104 19 51 0.030820584801 0.058395078249 4 1051 1051 4204 4418404
+14	6586 104 19 51 0.030820584801 0.058395078249 4 1028 1028 4112 4227136
+15	6690 104 21 53 0.030820584801 0.058395078249 4 1008 1008 4032 4064256
+16	6794 92 21 53 0.030820584801 0.058395078249 4 1 4 10 30
+17	6886 104 22 54 0.030820584801 0.058395078249 4 1000 1000 4000 4000000
+18	6990 144 22 54 0.030820584801 0.058395078249 4 0.008505334256 0.010396752416 0.037510524821 0.00035484659068493
+19	7134 92 22 54 0.030820584801 0.058395078249 4 0 3 6 14
+vector 20 Vanet.hostA.app[0] throughput:vector ETV
+attr source throughput(packetReceived)
+attr title "throughput, vector"
+attr unit bps
+vector 21 Vanet.hostB.app[0] throughput:vector ETV
+attr source throughput(packetReceived)
+attr title "throughput, vector"
+attr unit bps
+20	7498 23 54 54 0.058395078249 0.058395078249 1 0 0 0 0
+21	7521 37 54 54 0.058395078249 0.058395078249 1 547991.38830759 547991.38830759 547991.38830759 300294561659.28
+

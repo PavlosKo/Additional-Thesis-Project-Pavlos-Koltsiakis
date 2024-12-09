@@ -1,0 +1,680 @@
+version 2
+run canvas-0-20241209-09:25:14-2734
+attr configname canvas
+attr datetime 20241209-09:25:14
+attr experiment canvas
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsf ""
+attr measurement ""
+attr network Vanet
+attr processid 2734
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+param **.radio.displayCommunicationRange true
+param *.visualizer.mediumVisualizer.displaySignals true
+param *.visualizer.mobilityVisualizer.displayMovementTrails true
+param *.visualizer.mobilityVisualizer.displayVelocities true
+param *.roadsCanvasVisualizer.lineColor "\"firebrick2\""
+param *.roadsCanvasVisualizer.lineWidth 10
+param *.roadsCanvasVisualizer.lineWidthZoom true
+param *.node[*].numApps 1
+param *.node[1].app[0].typename "\"UdpBasicApp\""
+param *.node[1].app[0].stopTime 0.11s
+param *.node[1].app[0].destAddresses "\"node[0]\""
+param *.node[1].app[0].destPort 5000
+param *.node[1].app[0].messageLength 1000B
+param *.node[1].app[0].sendInterval exponential(12ms)
+param *.node[1].app[0].packetName "\"Warning\""
+param *.node[1].wlan[0].opMode "\"p\""
+param *.node[1].wlan[0].radio.bandName "\"5.9 GHz\""
+param *.node[1].wlan[0].radio.channelNumber 3
+param *.node[1].wlan[0].radio.transmitter.power 50mW
+param *.node[1].wlan[0].radio.bandwidth "30 MHz"
+param *.node[0].app[0].typename "\"UdpSink\""
+param *.node[0].app[0].localPort 5000
+param *.node[0].app[0].stopTime 0.11s
+param *.node[0].app[0].destAddresses "\"node[1]\""
+param *.node[0].app[0].destPort 5000
+param *.node[0].app[0].messageLength 1000B
+param *.node[0].app[0].sendInterval exponential(12ms)
+param *.node[0].app[0].packetName "\"Message Received\""
+param *.node[0].wlan[0].opMode "\"p\""
+param *.node[0].wlan[0].radio.bandName "\"5.9 GHz\""
+param *.node[0].wlan[0].radio.channelNumber 3
+param *.node[0].wlan[0].radio.transmitter.power 50mW
+param *.node[0].wlan[0].radio.bandwidth "30 MHz"
+param *.node[*].wlan[*].radio.antenna.mobility.typename "\"AttachedMobility\""
+param *.node[*].wlan[*].radio.antenna.mobility.mobilityModule "\"^.^.^.^.mobility\""
+param *.node[*].wlan[*].radio.antenna.mobility.constraintAreaMinX 0m
+param *.node[*].wlan[*].radio.antenna.mobility.constraintAreaMaxX 0m
+param *.node[*].wlan[*].radio.antenna.mobility.constraintAreaMinY 0m
+param *.node[*].wlan[*].radio.antenna.mobility.constraintAreaMaxY 0m
+param *.node[*].wlan[*].radio.antenna.mobility.constraintAreaMinZ 0m
+param *.node[*].wlan[*].radio.antenna.mobility.constraintAreaMaxZ 0m
+param *.node[1].app[0].localPort 5000
+param *.node[*].ipv4.configurator.typename "\"HostAutoConfigurator\""
+param *.node[*].ipv4.configurator.interfaces "\"wlan0\""
+param *.node[*].ipv4.configurator.mcastGroups "\"224.0.0.1\""
+param *.manager.updateInterval 0.1s
+param *.manager.host "\"localhost\""
+param *.manager.port 9999
+param *.manager.autoShutdown true
+param *.manager.launchConfig "xmldoc(\"vanet.launchd.xml\")"
+param *.manager.moduleType "\"org.car2x.veins.subprojects.veins_inet.VeinsInetCar\""
+param *.physicalEnvironment.config "xmldoc(\"vanet.xml\")"
+param *.node[*].mobility.typename "\"VeinsInetMobility\""
+
+vector 0 Vanet.node[0].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 1 Vanet.node[0].wlan[0].radio radioChannel:vector ETV
+attr interpolationmode sample-hold
+attr source radioChannelChanged
+attr title "Radio channel, vector"
+vector 2 Vanet.node[0].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 3 Vanet.node[0].wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
+attr interpolationmode sample-hold
+attr title "contention window, vector"
+vector 4 Vanet.node[1].wlan[0].radio radioMode:vector ETV
+attr interpolationmode sample-hold
+attr source radioModeChanged
+attr title "Radio mode, vector"
+vector 5 Vanet.node[1].wlan[0].radio radioChannel:vector ETV
+attr interpolationmode sample-hold
+attr source radioChannelChanged
+attr title "Radio channel, vector"
+vector 6 Vanet.node[1].wlan[0].radio receptionState:vector ETV
+attr interpolationmode sample-hold
+attr source receptionStateChanged
+attr title "Radio reception state, vector"
+vector 7 Vanet.node[1].wlan[0].mac.dcf.recoveryProcedure contentionWindowChanged:vector ETV
+attr interpolationmode sample-hold
+attr title "contention window, vector"
+vector 8 Vanet.node[1].app[0] packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSent
+attr title "packets sent, vector(packetBytes)"
+vector 9 Vanet.node[1].udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetSent
+attr title "packets sent, vector(packetBytes)"
+vector 10 Vanet.node[1].ipv4.arp arpRequestSent:vector(packetBytes) ETV
+attr source arpRequestSent
+attr title "ARP request sent, vector(packetBytes)"
+vector 11 Vanet.node[1].wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets received from upper layer, vector(packetBytes)"
+vector 12 Vanet.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue packetPushed:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packet pushed, vector(packetBytes)"
+vector 13 Vanet.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
+attr title "queue length, vector"
+vector 14 Vanet.node[1].wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
+attr interpolationmode none
+attr title "backoff periods, vector"
+vector 15 Vanet.node[1].wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
+attr interpolationmode sample-hold
+attr source count(backoffStarted)-count(backoffStopped)
+attr title "backoff active, vector"
+vector 16 Vanet.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue packetPopped:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packet popped, vector(packetBytes)"
+vector 17 Vanet.node[1].wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
+attr interpolationmode none
+attr source queueingTime(packetPopped)
+attr title "queueing times, vector"
+attr unit s
+vector 18 Vanet.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
+attr interpolationmode sample-hold
+attr source "count(packetEnqueued) - count(packetDequeued)"
+attr title "queue length, vector"
+vector 19 Vanet.node[1].wlan[0].mac.dcf datarateSelected:vector ETV
+attr interpolationmode none
+attr title "datarates selected, vector"
+vector 20 Vanet.node[1].wlan[0].mac packetSentToLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets sent to lower layer, vector(packetBytes)"
+vector 21 Vanet.node[1].wlan[0].mac.dcf frameSequenceActive:vector ETV
+attr interpolationmode sample-hold
+attr source count(frameSequenceStarted)-count(frameSequenceFinished)
+attr title "frame sequence active, vector"
+vector 22 Vanet.node[1].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr source transmissionStateChanged
+attr title "Radio transmission state, vector"
+0	2	0.1	0
+0	2	0.1	0
+0	2	0.1	2
+1	2	0.1	3
+2	2	0.1	1
+2	16	0.100097194185	3
+3	2	0.1	15
+4	2	0.1	0
+4	2	0.1	0
+4	2	0.1	2
+4	14	0.100097	3
+5	2	0.1	3
+6	2	0.1	1
+6	14	0.100097	0
+7	2	0.1	15
+8	4	0.1	1000
+9	8	0.1	1008
+10	9	0.1	28
+11	11	0.1	30
+12	11	0.1	58
+13	11	0.1	1
+13	13	0.100097	0
+14	11	0.1	3
+15	11	0.1	1
+15	12	0.100097	0
+16	13	0.100097	58
+17	13	0.100097	9.7e-05
+18	13	0.100097	1
+19	13	0.100097	12000000
+20	13	0.100097	58
+21	13	0.100097	1
+22	14	0.100097	1
+22	15	0.100097	2
+vector 23 Vanet.node[1].wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets sent, vector(packetBytes)"
+vector 24 Vanet.node[1].wlan[0].mac.dcf packetSentToPeerMulticast:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211Multicast(packetSentToPeer)
+attr title "packets sent: multicast, vector(packetBytes)"
+vector 25 Vanet.node[1].wlan[0].mac.dcf packetSentToPeerBroadcast:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211Broadcast(packetSentToPeer)
+attr title "packets sent: broadcast , vector(packetBytes)"
+vector 26 Vanet.node[1].wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211NotRetry(packetSentToPeer)
+attr title "packets sent: without retry, vector(packetBytes)"
+vector 27 Vanet.node[1].wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
+attr interpolationmode none
+attr source queueingTime(packetDequeued)
+attr title "queueing times, vector"
+vector 28 Vanet.node[0].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets received from lower layer, vector(packetBytes)"
+vector 29 Vanet.node[0].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets received, vector(packetBytes)"
+vector 30 Vanet.node[0].wlan[0].mac.dcf packetReceivedFromPeerMulticast:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211Multicast(packetReceivedFromPeer)
+attr title "packets received: multicast, vector(packetBytes)"
+vector 31 Vanet.node[0].wlan[0].mac.dcf packetReceivedFromPeerBroadcast:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211Broadcast(packetReceivedFromPeer)
+attr title "packets received: broadcast, vector(packetBytes)"
+vector 32 Vanet.node[0].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211NotRetry(packetReceivedFromPeer)
+attr title "packets received: without retry, vector(packetBytes)"
+vector 33 Vanet.node[0].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets sent to upper layer, vector(packetBytes)"
+vector 34 Vanet.node[0].ipv4.arp arpReplySent:vector(packetBytes) ETV
+attr source arpReplySent
+attr title "ARP replies sent, vector(packetBytes)"
+vector 35 Vanet.node[0].wlan[0].mac packetReceivedFromUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets received from upper layer, vector(packetBytes)"
+vector 36 Vanet.node[0].wlan[0].mac.dcf.channelAccess.pendingQueue packetPushed:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packet pushed, vector(packetBytes)"
+vector 37 Vanet.node[0].wlan[0].mac.dcf.channelAccess.pendingQueue queueLength:vector ETV
+attr interpolationmode sample-hold
+attr source "count(packetPushed) - count(packetPopped) - count(packetRemoved) - count(packetDropped)"
+attr title "queue length, vector"
+vector 38 Vanet.node[0].wlan[0].mac.dcf.channelAccess.contention backoffPeriodGenerated:vector ETV
+attr interpolationmode none
+attr title "backoff periods, vector"
+vector 39 Vanet.node[0].wlan[0].mac.dcf.channelAccess.contention backoffActive:vector ETV
+attr interpolationmode sample-hold
+attr source count(backoffStarted)-count(backoffStopped)
+attr title "backoff active, vector"
+vector 40 Vanet.node[0].wlan[0].mac.dcf.channelAccess.pendingQueue packetPopped:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packet popped, vector(packetBytes)"
+vector 41 Vanet.node[0].wlan[0].mac.dcf.channelAccess.pendingQueue queueingTime:vector ETV
+attr interpolationmode none
+attr source queueingTime(packetPopped)
+attr title "queueing times, vector"
+attr unit s
+vector 42 Vanet.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueLength:vector ETV
+attr interpolationmode sample-hold
+attr source "count(packetEnqueued) - count(packetDequeued)"
+attr title "queue length, vector"
+vector 43 Vanet.node[0].wlan[0].mac.dcf datarateSelected:vector ETV
+attr interpolationmode none
+attr title "datarates selected, vector"
+vector 44 Vanet.node[0].wlan[0].mac packetSentToLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets sent to lower layer, vector(packetBytes)"
+vector 45 Vanet.node[0].wlan[0].mac.dcf frameSequenceActive:vector ETV
+attr interpolationmode sample-hold
+attr source count(frameSequenceStarted)-count(frameSequenceFinished)
+attr title "frame sequence active, vector"
+vector 46 Vanet.node[0].wlan[0].radio transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr source transmissionStateChanged
+attr title "Radio transmission state, vector"
+vector 47 Vanet.node[0].wlan[0].mac.dcf packetSentToPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets sent, vector(packetBytes)"
+vector 48 Vanet.node[0].wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211Unicast(packetSentToPeer)
+attr title "packets sent: unicast, vector(packetBytes)"
+vector 49 Vanet.node[0].wlan[0].mac.dcf packetSentToPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211NotRetry(packetSentToPeer)
+attr title "packets sent: without retry, vector(packetBytes)"
+vector 50 Vanet.node[0].wlan[0].mac.rx nav:vector ETV
+attr interpolationmode linear
+attr source navChanged
+attr title "network allocation vector, vector"
+vector 51 Vanet.node[1].wlan[0].mac packetReceivedFromLower:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets received from lower layer, vector(packetBytes)"
+vector 52 Vanet.node[1].wlan[0].mac.dcf packetReceivedFromPeer:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets received, vector(packetBytes)"
+vector 53 Vanet.node[1].wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211Unicast(packetReceivedFromPeer)
+attr title "packets received: unicast, vector(packetBytes)"
+vector 54 Vanet.node[1].wlan[0].mac.dcf packetReceivedFromPeerWithoutRetry:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211NotRetry(packetReceivedFromPeer)
+attr title "packets received: without retry, vector(packetBytes)"
+vector 55 Vanet.node[1].wlan[0].mac packetSentToUpper:vector(packetBytes) ETV
+attr interpolationmode none
+attr title "packets sent to upper layer, vector(packetBytes)"
+vector 56 Vanet.node[1].wlan[0].mac.dcf packetSentToPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211Unicast(packetSentToPeer)
+attr title "packets sent: unicast, vector(packetBytes)"
+vector 57 Vanet.node[0].wlan[0].mac.dcf packetReceivedFromPeerUnicast:vector(packetBytes) ETV
+attr interpolationmode none
+attr source ieee80211Unicast(packetReceivedFromPeer)
+attr title "packets received: unicast, vector(packetBytes)"
+vector 58 Vanet.node[0].wlan[0].mac.dcf.channelAccess.inProgressFrames queueingTime:vector ETV
+attr interpolationmode none
+attr source queueingTime(packetDequeued)
+attr title "queueing times, vector"
+0	27	0.100308194185	3
+0	31	0.100396194185	2
+2	19	0.100185194185	1
+2	27	0.100308194185	0
+2	31	0.100396194185	1
+2	41	0.100428582555	3
+2	45	0.100484582555	1
+4	18	0.100185	2
+4	39	0.10042838837	3
+4	44	0.10048438837	2
+4	49	0.10056838837	3
+6	18	0.100185	1
+6	29	0.10030838837	3
+6	32	0.10039638837	1
+6	39	0.10042838837	0
+6	44	0.10048438837	1
+6	49	0.10056838837	0
+11	37	0.10039638837	1030
+12	37	0.10039638837	1058
+13	37	0.10039638837	1
+13	48	0.10056838837	0
+14	37	0.10039638837	2
+15	37	0.10039638837	1
+15	39	0.10042838837	0
+15	44	0.10048438837	1
+15	47	0.10056838837	0
+16	48	0.10056838837	1058
+17	48	0.10056838837	0.000172
+18	17	0.100185	0
+18	48	0.10056838837	1
+19	33	0.10039638837	12000000
+19	48	0.10056838837	12000000
+20	38	0.10042838837	14
+20	48	0.10056838837	1058
+21	17	0.100185	0
+21	48	0.10056838837	1
+22	17	0.100185	1
+22	18	0.100185	0
+22	39	0.10042838837	1
+22	40	0.10042838837	2
+22	43	0.10048438837	1
+22	44	0.10048438837	0
+22	49	0.10056838837	1
+22	50	0.10056838837	2
+23	17	0.100185	58
+23	43	0.10048438837	14
+24	17	0.100185	58
+25	17	0.100185	58
+26	17	0.100185	58
+26	43	0.10048438837	14
+27	17	0.100185	8.8e-05
+28	20	0.100185194185	58
+28	46	0.100484582555	14
+29	20	0.100185194185	58
+29	46	0.100484582555	14
+30	20	0.100185194185	58
+31	20	0.100185194185	58
+32	20	0.100185194185	58
+32	46	0.100484582555	14
+33	20	0.100185194185	30
+34	22	0.100185194185	28
+35	24	0.100185194185	30
+36	24	0.100185194185	58
+37	24	0.100185194185	1
+37	26	0.100308194185	0
+38	24	0.100185194185	5
+39	24	0.100185194185	1
+39	25	0.100308194185	0
+40	26	0.100308194185	58
+41	26	0.100308194185	0.000123
+42	26	0.100308194185	1
+42	46	0.100484582555	0
+43	26	0.100308194185	12000000
+44	26	0.100308194185	58
+45	26	0.100308194185	1
+45	46	0.100484582555	0
+46	27	0.100308194185	1
+46	28	0.100308194185	2
+46	30	0.100396194185	1
+46	31	0.100396194185	0
+47	30	0.100396194185	58
+48	30	0.100396194185	58
+49	30	0.100396194185	58
+50	30	0.100396194185	0
+50	30	0.100396194185	8.8e-05
+50	42	0.100484194185	0
+51	33	0.10039638837	58
+52	33	0.10039638837	58
+53	33	0.10039638837	58
+54	33	0.10039638837	58
+55	33	0.10039638837	30
+56	43	0.10048438837	14
+57	46	0.100484582555	14
+58	46	0.100484582555	0.00017638837
+2	51	0.100568582555	3
+vector 59 Vanet.node[1].wlan[0].mac.rx nav:vector ETV
+attr interpolationmode linear
+attr source navChanged
+attr title "network allocation vector, vector"
+vector 60 Vanet.node[0].udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceived
+attr title "packets received, vector(packetBytes)"
+vector 61 Vanet.node[0].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr source packetSentToUpper
+attr title "packets passed up, vector(count)"
+vector 62 Vanet.node[0].app[0] packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr source packetReceived
+attr title "packets received, vector(packetBytes)"
+vector 63 Vanet.node[0].app[0] throughput:vector ETV
+attr source throughput(packetReceived)
+attr title "throughput, vector"
+attr unit bps
+vector 64 Vanet.node[0].app[0] endToEndDelay:vector ETV
+attr interpolationmode none
+attr source dataAge(packetReceived)
+attr title "end-to-end delay, vector"
+attr unit s
+vector 65 Vanet.node[0].app[0] rcvdPkSeqNo:vector ETV
+attr interpolationmode none
+attr source appPkSeqNo(packetReceived)
+attr title "received packet sequence number, vector"
+0	61	0.101352582555	3
+0	66	0.101408582555	2
+0	88	0.107396776025	3
+0	93	0.107452776025	2
+2	54	0.101320582555	1
+2	61	0.101352582555	0
+2	66	0.101408582555	1
+2	78	0.106612776025	3
+2	81	0.107364776025	1
+2	88	0.107396776025	0
+2	93	0.107452776025	1
+4	53	0.10132038837	2
+4	76	0.10661258184	3
+4	80	0.10736458184	2
+6	53	0.10132038837	1
+6	63	0.10135277674	3
+6	67	0.10140877674	1
+6	76	0.10661258184	0
+6	80	0.10736458184	1
+6	90	0.10739697021	3
+6	94	0.10745297021	1
+8	69	0.10661258184	1000
+9	70	0.10661258184	1008
+11	73	0.10661258184	1030
+12	73	0.10661258184	1058
+13	73	0.10661258184	1
+13	75	0.10661258184	0
+14	73	0.10661258184	6
+15	73	0.10661258184	1
+15	74	0.10661258184	0
+16	75	0.10661258184	1058
+17	75	0.10661258184	0
+18	68	0.10140877674	0
+18	75	0.10661258184	1
+18	95	0.10745297021	0
+19	75	0.10661258184	12000000
+20	75	0.10661258184	1058
+21	68	0.10140877674	0
+21	75	0.10661258184	1
+21	95	0.10745297021	0
+22	52	0.10132038837	1
+22	53	0.10132038837	0
+22	76	0.10661258184	1
+22	77	0.10661258184	2
+22	79	0.10736458184	1
+22	80	0.10736458184	0
+23	52	0.10132038837	1058
+23	79	0.10736458184	1058
+26	52	0.10132038837	1058
+26	79	0.10736458184	1058
+27	68	0.10140877674	0.00084038837
+27	95	0.10745297021	0.00084038837
+28	55	0.101320582555	1058
+28	82	0.107364776025	1058
+29	55	0.101320582555	1058
+29	82	0.107364776025	1058
+32	55	0.101320582555	1058
+32	82	0.107364776025	1058
+33	55	0.101320582555	1030
+33	82	0.107364776025	1030
+43	55	0.101320582555	12000000
+43	82	0.107364776025	12000000
+44	60	0.101352582555	14
+44	87	0.107396776025	14
+46	61	0.101352582555	1
+46	62	0.101352582555	2
+46	65	0.101408582555	1
+46	66	0.101408582555	0
+46	88	0.107396776025	1
+46	89	0.107396776025	2
+46	92	0.107452776025	1
+46	93	0.107452776025	0
+47	65	0.101408582555	14
+47	92	0.107452776025	14
+48	65	0.101408582555	14
+48	92	0.107452776025	14
+49	65	0.101408582555	14
+49	92	0.107452776025	14
+51	68	0.10140877674	14
+51	95	0.10745297021	14
+52	68	0.10140877674	14
+52	95	0.10745297021	14
+53	68	0.10140877674	14
+53	95	0.10745297021	14
+54	68	0.10140877674	14
+54	95	0.10745297021	14
+56	52	0.10132038837	1058
+56	79	0.10736458184	1058
+57	55	0.101320582555	1058
+57	82	0.107364776025	1058
+59	52	0.10132038837	0
+59	52	0.10132038837	8.8e-05
+59	64	0.10140838837	0
+59	79	0.10736458184	0
+59	79	0.10736458184	8.8e-05
+59	91	0.10745258184	0
+60	58	0.101320582555	1008
+60	85	0.107364776025	1008
+61	58	0.101320582555	1
+61	85	0.107364776025	2
+62	59	0.101320582555	1000
+62	86	0.107364776025	1000
+63	59	0.1	0
+64	59	0.101320582555	0.001320582555
+64	86	0.107364776025	0.000752194185
+65	59	0.101320582555	0
+65	86	0.107364776025	1
+vector 66 Vanet.node[1].app[0] throughput:vector ETV
+attr source throughput(packetReceived)
+attr title "throughput, vector"
+attr unit bps
+63	171	0.2	160000
+63	171	0.3	0
+63	171	0.4	0
+63	171	0.5	0
+63	171	0.6	0
+63	171	0.7	0
+63	171	0.8	0
+63	171	0.9	0
+63	171	1	0
+63	171	1.1	0
+63	171	1.2	0
+63	171	1.3	0
+63	171	1.4	0
+63	171	1.5	0
+63	171	1.6	0
+63	171	1.7	0
+63	171	1.8	0
+63	171	1.9	0
+63	171	2	0
+63	171	2.1	0
+63	171	2.2	0
+63	171	2.3	0
+63	171	2.4	0
+63	171	2.5	0
+63	171	2.6	0
+63	171	2.7	0
+63	171	2.8	0
+63	171	2.9	0
+63	171	3	0
+63	171	3.1	0
+63	171	3.2	0
+63	171	3.3	0
+63	171	3.4	0
+63	171	3.5	0
+63	171	3.6	0
+63	171	3.7	0
+63	171	3.8	0
+63	171	3.9	0
+63	171	4	0
+63	171	4.1	0
+63	171	4.2	0
+63	171	4.3	0
+63	171	4.4	0
+63	171	4.5	0
+63	171	4.6	0
+63	171	4.7	0
+63	171	4.8	0
+63	171	4.9	0
+63	171	5	0
+63	171	5.1	0
+63	171	5.2	0
+63	171	5.3	0
+63	171	5.4	0
+63	171	5.5	0
+63	171	5.6	0
+63	171	5.7	0
+63	171	5.8	0
+63	171	5.9	0
+63	171	6	0
+63	171	6.1	0
+63	171	6.2	0
+63	171	6.3	0
+63	171	6.4	0
+66	171	0.1	0
+66	171	0.2	0
+66	171	0.3	0
+66	171	0.4	0
+66	171	0.5	0
+66	171	0.6	0
+66	171	0.7	0
+66	171	0.8	0
+66	171	0.9	0
+66	171	1	0
+66	171	1.1	0
+66	171	1.2	0
+66	171	1.3	0
+66	171	1.4	0
+66	171	1.5	0
+66	171	1.6	0
+66	171	1.7	0
+66	171	1.8	0
+66	171	1.9	0
+66	171	2	0
+66	171	2.1	0
+66	171	2.2	0
+66	171	2.3	0
+66	171	2.4	0
+66	171	2.5	0
+66	171	2.6	0
+66	171	2.7	0
+66	171	2.8	0
+66	171	2.9	0
+66	171	3	0
+66	171	3.1	0
+66	171	3.2	0
+66	171	3.3	0
+66	171	3.4	0
+66	171	3.5	0
+66	171	3.6	0
+66	171	3.7	0
+66	171	3.8	0
+66	171	3.9	0
+66	171	4	0
+66	171	4.1	0
+66	171	4.2	0
+66	171	4.3	0
+66	171	4.4	0
+66	171	4.5	0
+66	171	4.6	0
+66	171	4.7	0
+66	171	4.8	0
+66	171	4.9	0
+66	171	5	0
+66	171	5.1	0
+66	171	5.2	0
+66	171	5.3	0
+66	171	5.4	0
+66	171	5.5	0
+66	171	5.6	0
+66	171	5.7	0
+66	171	5.8	0
+66	171	5.9	0
+66	171	6	0
+66	171	6.1	0
+66	171	6.2	0
+66	171	6.3	0
+66	171	6.4	0
+
